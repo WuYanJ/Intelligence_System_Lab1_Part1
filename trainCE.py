@@ -12,8 +12,8 @@ import matplotlib.pyplot as plot
 sampleAmount = 12 * 600
 
 # 每层的神经元个数向量M，用元组记录，因为不可动态改变
-# M = (784, 60, 20, 12)
 M = (784, 60, 12)
+# M = (784, 20, 12)
 
 imgWidth=28
 imgHeight=28
@@ -21,7 +21,7 @@ imgHeight=28
 L = len(M)
 
 # learningRate
-rate = 0.001
+rate = 0.01
 
 
 # 激活函数选择
@@ -64,9 +64,9 @@ def sigmoid(x):
         y = np.zeros(shape(x))
         for i in range(len(x)):
             if x.tolist()[0][i] > 0:
-                y[i] = 1 / (1 + exp((-1) * x.tolist()[0][i]))
+                y[i] = 1 / (1 + exp((-1) * x[i]))
             else:
-                y[i] = exp(x.tolist()[0][i]) / (1 + exp(x.tolist()[0][i]))
+                y[i] = exp(x[i]) / (1 + exp(x[i]))
     else:
         y = 1 / (1 + exp(-x))
     return y
@@ -86,18 +86,29 @@ def dSigmoid(x):
 def softmax(x):
     denominator = 0  # 求分母sigma exp
     for i in range(len(x)):
-        denominator += exp(x.tolist()[0][i])
+        denominator += exp(x[i])
     y = np.zeros(shape(x))
     for i in range(len(x)):
-        y[i] = exp(x.tolist()[0][i]) / denominator
+        y[i] = exp(x[i]) / denominator
+        # print(y[i],",")
     return y
 
 
+# def wbInit(M):
+#     for i in range(L - 1):
+#         weightMatrix = mat(random.uniform(-1, 1, size=(M[i], M[i + 1])))
+#         W.append(weightMatrix)
+#         if i == L - 2:
+#             biasMatrix = mat(random.uniform(-0.2, 0.2, size=(M[i + 1], 1)))
+#         else:
+#             biasMatrix = mat(random.uniform(-1, 0, size=(M[i + 1], 1)))
+#         b.append(biasMatrix)
+#     return W, b
 def wbInit(M):
     for i in range(L - 1):
-        weightMatrix = mat(random.uniform(-0.1, 0.1, size=(M[i], M[i + 1])))
+        weightMatrix = mat(random.uniform(-100 / M[i], 100 / M[i], size=(M[i], M[i+1])))
         W.append(weightMatrix)
-        biasMatrix = mat(random.uniform(-0.01, 0, size=(M[i + 1], 1)))
+        biasMatrix = mat(random.uniform(-100 / M[i], 0, size=(M[i+1], 1)))
         b.append(biasMatrix)
     return W, b
 
@@ -119,14 +130,14 @@ def img2vector(filename):
 
 def computeDirIndex(i):
     # return int(i / 620 + 1)
-    return int(i / 600 + 1)
-    # return int(i / 20 + 1)
+    # return int(i / 600 + 1)
+    return int(i / 20 + 1)
 
 
 def computeFileIndex(i, dirIndex):
     # return int(i - (dirIndex - 1) * 620 + 1)
-    return int(i - (dirIndex - 1) * 600 + 1)
-    # return int(i - (dirIndex - 1) * 20 + 1)
+    # return int(i - (dirIndex - 1) * 600 + 1)
+    return int(i - (dirIndex - 1) * 20 + 1)
 
 
 def forward(M, W, b, data, label):
@@ -135,8 +146,8 @@ def forward(M, W, b, data, label):
     :param M: 层数向量
     :param W: 权值矩阵
     :param data: 传入的单个数据 (784x1矩阵)
-    :param label:传入的单个标签
-    :return:net, out, y, E矩阵
+    :param label: 传入的单个标签
+    :return: net, out, y, E矩阵
     """
     L = len(M)
     net = []
@@ -146,6 +157,7 @@ def forward(M, W, b, data, label):
         net.append(mat(np.zeros(M[i])))
         out.append(mat(np.zeros(M[i])))  # 横过来的向量
     out[0] = data
+    # print("data\n", out[0])
     # 循环到倒数第二层结束，最后一层换softmax函数
     for m in range(1, L):
         if m == 1:
@@ -153,15 +165,23 @@ def forward(M, W, b, data, label):
         else:
             net[m] = out[m - 1] * W[m - 1] + b[m - 1].transpose()  # 第m层神经元净输入
         out[m] = activate(net[m])  # 第m层神经元净输出
-    print("out[L - 1]",out[L - 1])
-    out[L - 1] = softmax(net[L - 1])  # 最外层用softmax激活函数
+    # out[L - 1] = softmax(net[L - 1])  # 最外层用softmax激活函数
+    # out[L - 1] = softmax(np.array(net[L-1])[0])
+    # print("net[L - 1].tolist()", net[L - 1].tolist())
+    out[L - 1] = mat(softmax(net[L - 1].T.tolist())).T
+    # print("out[L-1]\n", out[L-1])
     y = out[L - 1].transpose()  # fy是横过来的向量，是softmax以前的f(x）
-    # E = 0.5 * multiply(y - label, y - label)
-    E = 0.5 * (y - label).T * (y - label)
+    # E = 0.5 * (y - label).T * (y - label)
+    for i in range(12):
+        if label[i] == 1:
+            l = i
+            break
+    # Emse = 0.5 * (y - label).T * (y - label)
+    E = (-1) * log(y.tolist()[l])  # -ln(yi)
     return net, out, y, E
 
 
-def backward(M, W, b, net, out, y, E, label, rate):
+def backward(M, W, b, net, out, y, E, label, rate, lmd=0.00009):
     """
     后向推导函数，返回更新后的W, b参数
     :param M: 层数向量
@@ -181,17 +201,20 @@ def backward(M, W, b, net, out, y, E, label, rate):
     for m in layer:  # 从输出层回退
         if m == len(M) - 1:  # 如果是输出层
             grad[m] = -(label - y)
-            W[m - 1] -= rate * (grad[m] * out[m - 1]).transpose()
+            # W[m - 1] -= rate * (grad[m] * out[m - 1]).transpose()
+            W[m - 1] -= (rate * (grad[m] * out[m - 1]).transpose() + rate * lmd * W[m - 1])  # L2 Normalization
             b[m - 1] -= rate * grad[m]
         elif m == 1:
             t = grad[m + 1].transpose() * W[m].transpose()
             grad[m] = multiply(dActivate(net[m]).transpose(), t.transpose())
-            W[m - 1] -= rate * (grad[m] * out[m - 1].transpose()).transpose()
+            # W[m - 1] -= rate * (grad[m] * out[m - 1].transpose()).transpose()
+            W[m - 1] -= (rate * (grad[m] * out[m - 1].transpose()).transpose() + rate * lmd * W[m - 1])  # L2 Normalization
             b[m - 1] -= rate * grad[m]
         else:
             t = grad[m + 1].transpose() * W[m].transpose()
             grad[m] = multiply(dActivate(net[m]).transpose(), t.transpose())
-            W[m - 1] -= rate * (grad[m] * out[m - 1]).transpose()
+            # W[m - 1] -= rate * (grad[m] * out[m - 1]).transpose()
+            W[m - 1] -= (rate * (grad[m] * out[m - 1]).transpose() + rate * lmd * W[m - 1])  # L2 Normalization
             b[m - 1] -= rate * grad[m]
     return W, b
 
@@ -216,17 +239,20 @@ def training(M, W, b, iteration=5):
             fileIndex = computeFileIndex(i, dirIndex)
             label = [0] * 12
             label[(int)(dirIndex - 1)] = 1
-            print("./train/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")
+            # print("./train/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")
             im_matrix = img2vector("./train/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")  # 列向量
             lab_matrix = mat(label).transpose()
             net, out, y, E = forward(M, W, b, im_matrix, lab_matrix)
             newRate = rate + rate / (iter + 1)
             (W, b) = backward(M, W, b, net, out, y, E, lab_matrix, newRate)
-            loss += E[0]
+            loss += E
         xList.append(iter + 1)
         lossList.append(loss.tolist()[0])
+        print(loss.tolist()[0])
     plot.figure()
     plot.plot(xList, lossList, 'o')
+    title = 'lr=' + str(rate) + ' M=' + str(M) + ' iter=' + str(iteration) + ' no batch_size CE lmd=0.00009'
+    plot.title(title)
     plot.show()
             # print("第%d个样本训练！"%i)
         # error = test(dataMat , labelMat , M , W , b)
@@ -272,11 +298,11 @@ def readParam(filename):
 
 if __name__ == "__main__":
     M = [784, 60, 12]
-    W, b = wbInit(M)
 
-    W, b = training(M, W, b, 10)
-    store(W, 'weights.txt')
-    store(b, 'biases.txt')
-    # W = readParam('weights.txt')
-    # b = readParam('biases.txt')
-    # test(M, W, b)
+    # W, b = wbInit(M)
+    # W, b = training(M, W, b, 100)
+    # store(W, './Params/weightsCE.txt')
+    # store(b, './Params/biasesCE.txt')
+    W = readParam('./Params/weightsCE.txt')
+    b = readParam('./Params/biasesCE.txt')
+    test(M, W, b)

@@ -1,7 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5a56113f-ce00-4f07-b9b5-8d9f94ce6c49" name="Default Changelist" comment="" />
+    <list default="true" id="5a56113f-ce00-4f07-b9b5-8d9f94ce6c49" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Params/biases(hid=30).txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Params/weights(hid=30).txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/batch_norm.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/batch_normalization.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/testmat.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trainCE(for norm)dup.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/trainCEtemp.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/train_1000.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/train_aug.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/train_sleep.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CurveBiases.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CurveBiases.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CurveFitting.py" beforeDir="false" afterPath="$PROJECT_DIR$/CurveFitting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CurveWeights.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CurveWeights.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biases.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp/5/604.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/temp/5/604.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/1/428.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/1/554.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/12/205.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/2/114.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/2/373.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/2/66.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/train/2/66.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/4/45.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/5/372.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/7/158.bmp" beforeDir="false" afterPath="$PROJECT_DIR$/train/7/158.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/7/262.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/8/127.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/8/344.bmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train1.py" beforeDir="false" afterPath="$PROJECT_DIR$/train1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trainCE.py" beforeDir="false" afterPath="$PROJECT_DIR$/trainCE.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weights.txt" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +47,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1j24akFIRiYKNAPT85vqr0nUHHB" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -22,6 +59,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/train/1" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -37,11 +75,12 @@
       <recent name="$PROJECT_DIR$/train/1" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Params" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.trainCE">
-    <configuration name="CurveFitting" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.train_aug">
+    <configuration name="data_aug" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="智能系统Lab1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -54,7 +93,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CurveFitting.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_aug.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -63,7 +102,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="train" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="trainCE(for norm)dup" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="智能系统Lab1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -76,7 +115,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/trainCE(for norm)dup.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -85,7 +124,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="train1" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="trainCEtemp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="智能系统Lab1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -98,7 +137,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train1.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/trainCEtemp.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -107,7 +146,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="trainCE" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="train_aug" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="智能系统Lab1" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -120,7 +159,29 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/trainCE.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train_aug.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="train_sleep" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="智能系统Lab1" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/train_sleep.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -131,10 +192,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.trainCE" />
-        <item itemvalue="Python.train1" />
-        <item itemvalue="Python.CurveFitting" />
-        <item itemvalue="Python.train" />
+        <item itemvalue="Python.train_aug" />
+        <item itemvalue="Python.trainCE(for norm)dup" />
+        <item itemvalue="Python.train_sleep" />
+        <item itemvalue="Python.trainCEtemp" />
+        <item itemvalue="Python.data_aug" />
       </list>
     </recent_temporary>
   </component>
@@ -151,7 +213,10 @@
       <workItem from="1602988929535" duration="28246000" />
       <workItem from="1603066733340" duration="11365000" />
       <workItem from="1603095196547" duration="49013000" />
-      <workItem from="1603329609452" duration="1028000" />
+      <workItem from="1603329609452" duration="25228000" />
+      <workItem from="1603427446520" duration="73373000" />
+      <workItem from="1603603624807" duration="13354000" />
+      <workItem from="1603624826908" duration="20292000" />
     </task>
     <servers />
   </component>
@@ -159,22 +224,22 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1250" height="301" key="GridCell.Tab.0.bottom" timestamp="1603329606018">
+    <state width="1245" height="239" key="GridCell.Tab.0.bottom" timestamp="1603674963769">
       <screen x="0" y="23" width="1440" height="809" />
     </state>
-    <state width="1250" height="301" key="GridCell.Tab.0.bottom/0.23.1440.809@0.23.1440.809" timestamp="1603329606018" />
-    <state width="1250" height="301" key="GridCell.Tab.0.center" timestamp="1603329606017">
+    <state width="1245" height="239" key="GridCell.Tab.0.bottom/0.23.1440.809@0.23.1440.809" timestamp="1603674963769" />
+    <state width="1245" height="239" key="GridCell.Tab.0.center" timestamp="1603674963768">
       <screen x="0" y="23" width="1440" height="809" />
     </state>
-    <state width="1250" height="301" key="GridCell.Tab.0.center/0.23.1440.809@0.23.1440.809" timestamp="1603329606017" />
-    <state width="1250" height="301" key="GridCell.Tab.0.left" timestamp="1603329606017">
+    <state width="1245" height="239" key="GridCell.Tab.0.center/0.23.1440.809@0.23.1440.809" timestamp="1603674963768" />
+    <state width="1245" height="239" key="GridCell.Tab.0.left" timestamp="1603674963768">
       <screen x="0" y="23" width="1440" height="809" />
     </state>
-    <state width="1250" height="301" key="GridCell.Tab.0.left/0.23.1440.809@0.23.1440.809" timestamp="1603329606017" />
-    <state width="1250" height="301" key="GridCell.Tab.0.right" timestamp="1603329606018">
+    <state width="1245" height="239" key="GridCell.Tab.0.left/0.23.1440.809@0.23.1440.809" timestamp="1603674963768" />
+    <state width="1245" height="239" key="GridCell.Tab.0.right" timestamp="1603674963769">
       <screen x="0" y="23" width="1440" height="809" />
     </state>
-    <state width="1250" height="301" key="GridCell.Tab.0.right/0.23.1440.809@0.23.1440.809" timestamp="1603329606018" />
+    <state width="1245" height="239" key="GridCell.Tab.0.right/0.23.1440.809@0.23.1440.809" timestamp="1603674963769" />
     <state width="1355" height="258" key="GridCell.Tab.1.bottom" timestamp="1603066709372">
       <screen x="0" y="23" width="1440" height="809" />
     </state>
@@ -195,19 +260,30 @@
       <screen x="0" y="23" width="1440" height="809" />
     </state>
     <state x="94" y="23" key="SettingsEditor/0.23.1440.809@0.23.1440.809" timestamp="1603085688403" />
-    <state x="377" y="260" key="com.intellij.ide.util.TipDialog" timestamp="1603069083209">
+    <state x="377" y="260" key="com.intellij.ide.util.TipDialog" timestamp="1603624826842">
       <screen x="0" y="23" width="1440" height="809" />
     </state>
-    <state x="377" y="260" key="com.intellij.ide.util.TipDialog/0.23.1440.809@0.23.1440.809" timestamp="1603069083209" />
+    <state x="377" y="260" key="com.intellij.ide.util.TipDialog/0.23.1440.809@0.23.1440.809" timestamp="1603624826842" />
     <state x="415" y="156" width="670" height="676" key="search.everywhere.popup" timestamp="1603282870817">
       <screen x="0" y="23" width="1440" height="809" />
     </state>
     <state x="415" y="156" width="670" height="676" key="search.everywhere.popup/0.23.1440.809@0.23.1440.809" timestamp="1603282870817" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Lab1$train_1000.coverage" NAME="train_1000 Coverage Results" MODIFIED="1603550059791" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Lab1$data_aug.coverage" NAME="data_aug Coverage Results" MODIFIED="1603625804616" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Lab1$batch_normalization.coverage" NAME="batch_normalization Coverage Results" MODIFIED="1603599567340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Lab1$trainCEtemp.coverage" NAME="trainCEtemp Coverage Results" MODIFIED="1603668673574" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Lab1$train_sleep.coverage" NAME="train_sleep Coverage Results" MODIFIED="1603672245559" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Lab1$CurveFitting.coverage" NAME="CurveFitting Coverage Results" MODIFIED="1603601186176" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Lab1$train_batch_se.coverage" NAME="train_batch_se Coverage Results" MODIFIED="1603528153150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Lab1$train_aug.coverage" NAME="train_aug Coverage Results" MODIFIED="1603673735570" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Lab1$train.coverage" NAME="train Coverage Results" MODIFIED="1603087715724" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Lab1$train1.coverage" NAME="train1 Coverage Results" MODIFIED="1603328911322" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Lab1$trainCE.coverage" NAME="trainCE Coverage Results" MODIFIED="1603329583527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Lab1$CurveFitting.coverage" NAME="CurveFitting Coverage Results" MODIFIED="1603300145536" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Lab1$train1.coverage" NAME="train1 Coverage Results" MODIFIED="1603527776329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Lab1$trainCE_for_norm_dup.coverage" NAME="trainCE(for norm)dup Coverage Results" MODIFIED="1603672249050" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Lab1$testmat.coverage" NAME="testmat Coverage Results" MODIFIED="1603519631280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Lab1$trainCE.coverage" NAME="trainCE Coverage Results" MODIFIED="1603620532826" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Lab1$batch_norm.coverage" NAME="batch_norm Coverage Results" MODIFIED="1603602373874" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Lab1$trainCE_for_norm_.coverage" NAME="trainCE(for norm) Coverage Results" MODIFIED="1603619284030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

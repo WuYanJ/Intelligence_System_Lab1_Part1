@@ -15,7 +15,7 @@ imgHeight = 28
 
 # 每层的神经元个数向量M，用元组记录，因为不可动态改变
 # M = (784, 60, 20, 12)
-M = (784, 60, 12)
+M = (784, 100, 12)
 
 # 网络层数len(M)
 L = len(M)
@@ -197,7 +197,7 @@ def training(M, W, b, iteration=5):
             label = [0] * 12
             label[(int)(dirIndex-1)] = 1
             # print("label:", label)
-            print("./train/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")
+            # print("./train/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")
             im_matrix = img2vector("./train/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")  # 列向量
             lab_matrix = mat(label).transpose()
             net, out, y, E = forward(M, W, b, im_matrix, lab_matrix)
@@ -207,8 +207,13 @@ def training(M, W, b, iteration=5):
             loss+=E[0]
         xList.append(iter+1)
         lossList.append(loss.tolist()[0])
+        print(loss.tolist()[0])
     plot.figure()
     plot.plot(xList, lossList, 'o')
+    title='lr='+ str(rate)+' M='+str(M)+ ' iter='+str(iteration)+ ' no batch SE'
+    plot.title(title)
+    plot.ylabel('loss')
+    plot.xlabel('epoc')
     plot.show()
     # print("第%d个样本训练！"%i)
     # error = test(dataMat , labelMat , M , W , b)
@@ -255,17 +260,17 @@ def grab(filename):
 
 
 if __name__ == "__main__":
-    # M = [784, 60, 12]
+    # M = [784, 100, 12]
     # W, b = wbInit(M)
-    #
+
     # # dataMat = mat(dataArr)
     # # labelMat = mat(labelArr)
     # # testMat = mat(testArr)
     # # labelMat2 = mat(labelArr2)
     # # W, b = training(M, W, b, dataMat, labelMat, testMat , labelMat2 , 100)
-    # W, b = training(M, W, b, 100)
-    # store(W, 'weights.txt')
-    # store(b, 'biases.txt')
-    W = grab('weights.txt')
-    b = grab('biases.txt')
+    # W, b = training(M, W, b, 500)
+    # store(W, 'weights1.txt')
+    # store(b, 'biases1.txt')
+    W = grab('Params/weights0.85MSE.txt')
+    b = grab('Params/biases0.85MSE.txt')
     test(M, W, b)

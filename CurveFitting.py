@@ -149,7 +149,7 @@ def training(M, W, b, iteration=5):
     """
     for iter in range(iteration):
         print("epoc %d:"%iter)
-        data = mat(2 * np.pi * np.random.random_sample())
+        data = mat(2 * np.pi * (np.random.random_sample() - 0.5))
         label = np.sin(data)
         net, out, y, E = forward(M, W, b, data, label)
         newRate = rate + rate/(iter + 1)
@@ -163,7 +163,7 @@ def test(M, W, b):
     for iter in range(100000):
         print("epoc %d:"%iter)
         # for i in range(len(dataMat)):
-        randomNum = 2 * np.pi * np.random.random_sample()
+        randomNum = 2 * np.pi * (np.random.random_sample() - 0.5)
         data = mat(randomNum)
         label = np.sin(randomNum)
         net, out, y, E = forward(M, W, b, data, label)
@@ -189,7 +189,7 @@ def grab(filename):
 
 
 if __name__ == "__main__":
-    # M = [1, 10, 1]
+    M = [1, 10, 1]
     # W, b = wbInit(M)
     #
     # # dataMat = mat(dataArr)

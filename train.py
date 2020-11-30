@@ -76,18 +76,25 @@ def img2vector(filename):
     return im_matrix.ravel()
 
 
-def weightInit():
-    """
-    W是一个L-1维数组，每个数组元素是一个i*j大小的matrix
-    :param i:前一层的神经元数量
-    :param j: 后一层的神经元数量
-    :return: 初始化后的权值矩阵
-    """
+# def weightInit():
+#     """
+#     W是一个L-1维数组，每个数组元素是一个i*j大小的matrix
+#     :param i:前一层的神经元数量
+#     :param j: 后一层的神经元数量
+#     :return: 初始化后的权值矩阵
+#     """
+#     for i in range(L - 1):
+#         # 产生一个2-8之间的，维度为（第i层神经元个数 * 第i+1层神经元个数）的随机整数矩阵
+#         weightMatrix = mat(random.randint(2, 8, size=(M[i], M[i + 1])))
+#         W.append(weightMatrix)
+#     return W
+def wbInit(M):
     for i in range(L - 1):
-        # 产生一个2-8之间的，维度为（第i层神经元个数 * 第i+1层神经元个数）的随机整数矩阵
-        weightMatrix = mat(random.randint(2, 8, size=(M[i], M[i + 1])))
+        weightMatrix = mat(random.uniform(-1 / M[i], 1 / M[i], size=(M[i], M[i+1])))
         W.append(weightMatrix)
-    return W
+        biasMatrix = mat(random.uniform(-1, 0, size=(M[i+1], 1)))
+        b.append(biasMatrix)
+    return W, b
 
 
 # sigmoid函数

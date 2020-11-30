@@ -177,7 +177,7 @@ def forward(M, W, b, data, label):
     return net, out, y, E
 
 
-def backward(M, W, b, net, out, y, E, label, rate, lmd=0.00008):
+def backward(M, W, b, net, out, y, E, label, rate, lmd=0.0001):
     """
     后向推导函数，返回更新后的W, b参数
     :param M: 层数向量
@@ -225,6 +225,7 @@ def training(M, W, b, iteration=5):
     xList = []
     for iter in range(iteration):
         print("epoc %d:" % iter)
+        test(M, W, b)
         sampleList = list(range(sampleAmount))
         random.shuffle(sampleList)
         loss = 0
@@ -267,10 +268,11 @@ def training(M, W, b, iteration=5):
             net, out, y, E = forward(M, W, b, im_matrix, lab_matrix)
             lossTest += E
         testLossList.append(lossTest.tolist()[0] * 150)
+
     plot.figure()
     plot.plot(xList, lossList, 'o')
     plot.plot(xList, testLossList, 'ro')
-    title = 'lr=' + str(rate) + ' M=' + str(M) + ' iter=' + str(iteration) + ' no batch_size CE lmd=0.00008'
+    title = 'lr=' + str(rate) + ' M=' + str(M) + ' iter=' + str(iteration) + ' no batch_size CE lmd=0.0001'
     plot.title(title)
     plot.show()
             # print("第%d个样本训练！"%i)
@@ -287,17 +289,17 @@ def test(M, W, b):
         fileIndex = computeTestFileIndex(i, dirIndex) + 600
         label = [0] * 12
         label[(int)(dirIndex - 1)] = 1
-        print("./temp/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")
+        # print("./temp/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")
         # print("./train/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")
         # im_matrix = img2vector("./train/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")  # 列向量
         im_matrix = img2vector("./temp/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")  # 列向量
         lab_matrix = mat(label).transpose()
         net, out, y, E = forward(M, W, b, im_matrix, lab_matrix)
-        print("y：", y)
+        # print("y：", y)
         t = argmax(y)
         if t == argmax(lab_matrix):
             count += 1
-            print("data%d 测试正确\n" % i)
+            # print("data%d 测试正确\n" % i)
     print("正确率：%f" % (count / 240))
     return count / 240
 
@@ -318,7 +320,7 @@ def readParam(filename):
 if __name__ == "__main__":
     M = [784, 60, 12]
     W, b = wbInit(M)
-    W, b = training(M, W, b, 100)
+    W, b = training(M, W, b, 20)
     store(W, 'Params/weightstest.txt')
     store(b, 'Params/biasestest.txt')
 

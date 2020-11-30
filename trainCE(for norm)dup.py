@@ -10,7 +10,7 @@ import matplotlib.pyplot as plot
 # 样本数量
 # sampleAmount = 12 * 620
 # sampleAmount = 12 * 600
-sampleAmount = 12 * 2999
+sampleAmount = 12 * 2600
 
 # 每层的神经元个数向量M，用元组记录，因为不可动态改变
 # M = (784, 200, 60, 12)
@@ -67,6 +67,7 @@ def sigmoid(x):
             if x.tolist()[0][i] > 0:
                 y[i] = 1 / (1 + exp((-1) * x[i]))
             else:
+                # 防止出现nan
                 y[i] = exp(x[i]) / (1 + exp(x[i]))
     else:
         y = 1 / (1 + exp(-x))
@@ -123,25 +124,26 @@ def img2vector(filename):
 
 def computeDirIndex(i):
     # return int(i / 600 + 1)
-    return int(i / 3000 + 1)
+    return int(i / 2600 + 1)
     # return int(i / 20 + 1)
 
 
 def computeFileIndex(i, dirIndex):
     # return int(i - (dirIndex - 1) * 600 + 1)
-    return int(i - (dirIndex - 1) * 3000 + 1)
+    return int(i - (dirIndex - 1) * 2600 + 1)
     # return int(i - (dirIndex - 1) * 20 + 1)
+
 
 def computeTestDirIndex(i):
     # return int(i / 600 + 1)
     # return int(i / 600 + 1)
-    return int(i / 20 + 1)
+    return int(i / 420 + 1)
 
 
 def computeTestFileIndex(i, dirIndex):
     # return int(i - (dirIndex - 1) * 620 + 1)
     # return int(i - (dirIndex - 1) * 600 + 1)
-    return int(i - (dirIndex - 1) * 20 + 1)
+    return int(i - (dirIndex - 1) * 420 + 1)
 
 
 def forward(M, W, b, data, label):
@@ -159,7 +161,7 @@ def forward(M, W, b, data, label):
     for i in range(L):
         # 初始化
         net.append(mat(np.zeros(M[i])))
-        out.append(mat(np.zeros(M[i])))  # 横过来的向量
+        out.append(mat(np.zeros(M[i])))  # 行向量
     out[0] = data
     for m in range(1, L):
         if m == 1:
@@ -173,11 +175,11 @@ def forward(M, W, b, data, label):
         if label[i] == 1:
             l=i
             break
-    E = (-1) * log(y.tolist()[l])  # -ln(yi)
+    E = (-1) * log(y.tolist()[l][0])  # -ln(yi)
     return net, out, y, E
 
 
-def backward(M, W, b, net, out, y, E, label, rate, lmd=0.0001):
+def backward(M, W, b, net, out, y, E, label, rate, lmd=0.00014):
     """
     后向推导函数，返回更新后的W, b参数
     :param M: 层数向量
@@ -212,7 +214,7 @@ def backward(M, W, b, net, out, y, E, label, rate, lmd=0.0001):
     return W, b
 
 
-def training(M, W, b, iteration=5):
+def training(M, W, b, iteration):
     """
     训练模型,输出结果
     :param M:神经元数量向量
@@ -221,13 +223,21 @@ def training(M, W, b, iteration=5):
     :return: 训练后的结果
     """
     lossList = []
+    dWList = []
+    dbList = []
     testLossList = []
     xList = []
+    accuList = []
     for iter in range(iteration):
         print("epoc %d:" % iter)
+        test(M, W, b)
         sampleList = list(range(sampleAmount))
         random.shuffle(sampleList)
         loss = 0
+        train_count = sampleAmount
+        train_correct = 0
+        dWsum = 0
+        dbsum = 0
         for i in sampleList:
             dirIndex = computeDirIndex(i)
             fileIndex = computeFileIndex(i, dirIndex)
@@ -240,21 +250,27 @@ def training(M, W, b, iteration=5):
                 filepath = "./train/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp"
             im_matrix = img2vector(filepath)  # 列向量
             if im_matrix is None:
+                train_count -= 1
                 # print(filepath, " not exist")
                 continue
             lab_matrix = mat(label).transpose()
             net, out, y, E = forward(M, W, b, im_matrix, lab_matrix)
+            t = argmax(y)
+            if t == argmax(lab_matrix):
+                train_correct += 1
             newRate = rate + rate / (iter + 1)
             (W, b) = backward(M, W, b, net, out, y, E, lab_matrix, newRate)
             # loss += E[0]
             loss += E
         xList.append(iter + 1)
-        lossList.append(loss.tolist()[0])
-        print(loss.tolist()[0])
+        lossList.append(loss)
+        accuList.append(train_correct / train_count)
+        print("Train正确率：", train_correct / train_count)
+        print(loss, "\n")
         # lossList.append(loss)
 
         lossTest=0
-        for i in range(12 * 20):
+        for i in range(12 * 420):
             dirIndex = computeTestDirIndex(i)
             fileIndex = computeTestFileIndex(i, dirIndex) + 600
             label = [0] * 12
@@ -262,44 +278,55 @@ def training(M, W, b, iteration=5):
             # print("./temp/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")
             # print("./train/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")
             # im_matrix = img2vector("./train/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")  # 列向量
-            im_matrix = img2vector("./temp/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")  # 列向量
+            filepath = "./temp/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp"
+            im_matrix = img2vector(filepath)  # 列向量
+            if im_matrix is None:
+                # print(filepath, " not exist")
+                continue
             lab_matrix = mat(label).transpose()
             net, out, y, E = forward(M, W, b, im_matrix, lab_matrix)
             lossTest += E
-        testLossList.append(lossTest.tolist()[0] * 150)
+        testLossList.append(lossTest * 6)
     plot.figure()
     plot.plot(xList, lossList, 'o')
     plot.plot(xList, testLossList, 'ro')
-    title = 'lr=' + str(rate) + ' M=' + str(M) + ' iter=' + str(iteration) + ' no batch_size CE lmd=0.0001'
+    title = 'lr=' + str(rate) + ' M=' + str(M) + ' iter=' + str(iteration) + ' no batch_size CE lmd=0.00014'
     plot.title(title)
     plot.show()
-            # print("第%d个样本训练！"%i)
-        # error = test(dataMat , labelMat , M , W , b)
-        # error2 = test(testMat , labelMat2 , M , W , b)
+    plot.figure()
+    plot.plot(xList, accuList, '*')
+    plot.show()
     return W, b
 
 
 def test(M, W, b):
     count = 0
+    sum = 5040
     # for i in range(sampleAmount, sampleAmount+100):
-    for i in range(12 * 20):
+    for i in range(12 * 420):
         dirIndex = computeTestDirIndex(i)
         fileIndex = computeTestFileIndex(i, dirIndex) + 600
         label = [0] * 12
         label[(int)(dirIndex - 1)] = 1
-        print("./temp/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")
+        # print("./temp/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")
         # print("./train/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")
         # im_matrix = img2vector("./train/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")  # 列向量
-        im_matrix = img2vector("./temp/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")  # 列向量
+        filepath = "./temp/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp"
+        im_matrix = img2vector(filepath)  # 列向量
+        if im_matrix is None:
+            sum -= 1
+            # print(filepath, " not exist")
+            continue
         lab_matrix = mat(label).transpose()
+        # print("./temp/" + str(dirIndex) + "/" + str(fileIndex) + ".bmp")
         net, out, y, E = forward(M, W, b, im_matrix, lab_matrix)
-        print("y：", y)
+        # print("y：", y)
         t = argmax(y)
         if t == argmax(lab_matrix):
             count += 1
-            print("data%d 测试正确\n" % i)
-    print("正确率：%f" % (count / 240))
-    return count / 240
+            # print("data%d 测试正确\n" % i)
+    print("正确率：%f" % (count / sum))
+    return count / sum
 
 
 def store(input, filename):
@@ -316,12 +343,12 @@ def readParam(filename):
 
 
 if __name__ == "__main__":
-    M = [784, 200, 60, 12]
+    M = [784, 60, 12]
     W, b = wbInit(M)
-    W, b = training(M, W, b, 100)
-    store(W, 'Params/weightstest-4h.txt')
-    store(b, 'Params/biasestest-4h.txt')
+    W, b = training(M, W, b, 120)
+    store(W, 'Params/weightsFinal.txt')
+    store(b, 'Params/biasesFinal.txt')
 
-    # W = readParam('Params/weightstest-4h.txt')
-    # b = readParam('Params/biasestest-4h.txt')
+    # W = readParam('Params/weightsFinal.txt')
+    # b = readParam('Params/biasesFinal.txt')
     # test(M, W, b)

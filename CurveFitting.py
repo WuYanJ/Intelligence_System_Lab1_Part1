@@ -122,8 +122,8 @@ def backward(M, W, b, net, out, y, E, label, rate):
     layer.reverse()
     for m in layer:  # 从输出层回退
         if m == len(M) - 1:  # 如果是输出层
-            grad[m] = y - label
-            # grad[m] = -multiply((label - y), dActivate(net[m]).transpose())
+            # grad[m] = y - label
+            grad[m] = -multiply((label - y), dActivate(net[m]).transpose())
             W[m-1] -= rate * (grad[m] * out[m-1]).transpose()
             b[m-1] -= rate * grad[m]
         elif m == 1:
@@ -147,31 +147,38 @@ def training(M, W, b, iteration=5):
     :param iteration: 迭代次数
     :return: 训练后的结果
     """
+    sampleList = []
+    for sample in range(100):
+        sampleList.append(mat(2 * np.pi * (np.random.random_sample() - 0.5)))
     for iter in range(iteration):
         print("epoc %d:"%iter)
-        data = mat(2 * np.pi * (np.random.random_sample() - 0.5))
-        label = np.sin(data)
-        net, out, y, E = forward(M, W, b, data, label)
-        newRate = rate + rate/(iter + 1)
-        W, b = backward(M, W, b, net, out, y, E, label, newRate)
+        for sampleIndex in range(100):
+            data = sampleList[sampleIndex]
+            label = np.sin(data)
+            net, out, y, E = forward(M, W, b, data, label)
+            newRate = rate + rate/(iter + 1)
+            W, b = backward(M, W, b, net, out, y, E, label, newRate)
     return W, b
 
 
 def test(M, W, b):
     x = []
     predict = []
-    for iter in range(100000):
+    Esum = 0
+    for iter in range(10000):
         print("epoc %d:"%iter)
         # for i in range(len(dataMat)):
         randomNum = 2 * np.pi * (np.random.random_sample() - 0.5)
         data = mat(randomNum)
         label = np.sin(randomNum)
         net, out, y, E = forward(M, W, b, data, label)
+        Esum += E[0]
         x.append(randomNum)
         predict.append(y.tolist()[0])
     plot.figure()
     plot.plot(x, predict, 'o')
     plot.show()
+    print("Emeans=", Esum / 10000)
     return 0
 
 
@@ -190,18 +197,12 @@ def grab(filename):
 
 if __name__ == "__main__":
     M = [1, 10, 1]
-    # W, b = wbInit(M)
-    #
-    # # dataMat = mat(dataArr)
-    # # labelMat = mat(labelArr)
-    # # testMat = mat(testArr)
-    # # labelMat2 = mat(labelArr2)
-    # # W, b = training(M, W, b, dataMat, labelMat, testMat , labelMat2 , 100)
-    # W, b = training(M, W, b, 1000000)
-    # store(W, 'CurveWeights.txt')
-    # store(b, 'CurveBiases.txt')
+    W, b = wbInit(M)
+    W, b = training(M, W, b, 10000)
+    store(W, 'CurveW.txt')
+    store(b, 'CurveB.txt')
 
 
-    W = grab('CurveWeights.txt')
-    b = grab('CurveBiases.txt')
-    test(M, W, b)
+    # W = grab('CurveW.txt')
+    # b = grab('CurveB.txt')
+    # test(M, W, b)
